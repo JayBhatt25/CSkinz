@@ -1,0 +1,71 @@
+.main_trade {
+    width: 100%;
+    height: 76.5vh;
+    /* text-align: center; */
+}
+
+.sections_container{
+    position: relative;
+    height: 80%;
+    width: 30%;
+    top: 10%;
+    left: 15%;
+    align-items: left;
+}
+.Rifles > header {
+    padding-bottom: 10px;
+    padding-left: 10px;
+    font-size: 25px;
+    font-weight: 700;
+}
+.Rifles {
+    display : flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+.Rifles > ul  {
+
+    list-style-type: none;
+}
+
+.Rifles  > ul > li {
+    padding-bottom: 5px;
+    
+}
+
+.Rifles a {
+    text-decoration: none;
+    color: black;
+}
+
+.Gloves > header {
+    padding-bottom: 10px;
+    padding-left: 10px;
+    font-size: 25px;
+    font-weight: 700;
+}
+.Gloves {
+    display : flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+.Gloves > ul  {
+
+    list-style-type: none;
+}
+
+.Gloves  > ul > li {
+    padding-bottom: 5px;
+    
+}
+
+.Gloves a {
+    text-decoration: none;
+    color: black;
+
+}
+
+.Gloves a:hover, .Rifles a:hover{
+    color: black;
+    font-weight: 500;
+}
