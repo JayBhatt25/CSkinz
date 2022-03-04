@@ -1,0 +1,59 @@
+<%- include('../partials/header.ejs') %>
+<main class="main_newTrade">
+            <div class="newTrade_container">
+                <form class="newTrade_form" action="/trades/" method="POST">
+                    <div class="newTrade_row">
+                        <div class="row_left">
+                            <label>Category</label>
+                        </div>
+                        <div class="row_right">
+                            <input type="text" id="category" name="category" placeholder="Enter Category">
+                        </div>
+                        
+                    </div>
+                    <div class="newTrade_row">
+                        <div class="row_left">
+                            <label>Skin</label>
+                        </div>
+                        <div class="row_right">
+                            <input type="text" id="skinname" name="skin_name" placeholder="Enter Skin Name">
+                        </div>
+                        
+                    </div>
+                    <div class="newTrade_row">
+                        <div class="row_left">
+                            <label>Image</label>
+                        </div>
+                        <div class="row_right">
+                            <input type="text" id="imglink" name="img" placeholder="Enter image link">
+                        </div>
+                        
+                    </div>
+                    <div class="newTrade_row">
+                        <div class="row_left">
+                            <label>Owner</label>
+                        </div>
+                        <div class="row_right">
+                            <input type="text" id="owner" name="owner" placeholder="Enter Owner">
+                        </div>
+                        
+                    </div>
+                    <div class="newTrade_row">
+                        <div class="row_left">
+                            <label>Details</label>
+                        </div>
+                        <div class="row_right">
+                            <textarea name="desc" placeholder="Enter Details.."></textarea>
+                        </div>
+                        
+                    </div>
+                   
+                   <div class="newTrade_row">
+                        <input type="submit" value="Create Trade" />
+
+                   </div>
+                    
+                </form>
+            </div>
+        </main>
+  <%- include('../partials/footer.ejs') %>

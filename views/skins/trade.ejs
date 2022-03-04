@@ -1,0 +1,52 @@
+<%- include('../partials/header.ejs') %>
+
+        <main class="skins_info">
+            <div class="info_container">
+                <div class="info_header">
+                    <div class="header_left">
+                        <div class="left_img">
+                            <img class="decimator_img" src="<%= skin.img %>" alt="decimator image" />
+                        </div>
+                        <div class="skin_name">
+                            <h3><%= skin.skin_name %></h3>
+                            owner <h4><%= skin.owner %></h4>
+                           
+                        </div>
+                       
+                    </div>
+
+                    <div class="header_right">
+                        <p>Are you interested in this skin?</p>
+                        <div class="right_buttons">
+                            <a href="trades.html" class="btn btn-success" >Trade it</a>
+                            <a href="trades.html" class="btn btn-primary">Rate it</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="info_desc">
+
+                    <h3>Details</h3>
+
+                    <div class="desc">
+                        <p><%= skin.desc %></p>
+                       
+                    </div>
+                    <div class="opr">
+                        <form>
+                            <button type="submit" formmethod="get" formaction = "/trades/<%= skin.id %>/edit" class="btn btn-primary">Edit</button>
+                            <button type="submit" formmethod="post" formaction = "/trades/<%= skin.id %>?_method=DELETE" class="btn btn-danger" >Delete</button>
+                        </form>
+                        
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </main>
+
+       <%- include('../partials/footer.ejs') %>

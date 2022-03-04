@@ -1,0 +1,59 @@
+<%- include('../partials/header.ejs') %>
+<main class="main_edit">
+            <div class="edit_container">
+                <form class="edit_form" action="/trades/<%= skin.id %>?_method=PUT" method="POST">
+                    <div class="edit_row">
+                        <div class="row_left">
+                            <label>Category</label>
+                        </div>
+                        <div class="row_right">
+                            <input type="text" id="category" name="category" value="<%= skin.category %>">
+                        </div>
+                        
+                    </div>
+                    <div class="edit_row">
+                        <div class="row_left">
+                            <label>Skin</label>
+                        </div>
+                        <div class="row_right">
+                            <input type="text" id="skinname" name="skin_name" value="<%= skin.skin_name %>" >
+                        </div>
+                        
+                    </div>
+                    <div class="edit_row">
+                        <div class="row_left">
+                            <label>Image</label>
+                        </div>
+                        <div class="row_right">
+                            <input type="text" id="imglink" name="img" value="<%= skin.img %>">
+                        </div>
+                        
+                    </div>
+                    <div class="edit_row">
+                        <div class="row_left">
+                            <label>Owner</label>
+                        </div>
+                        <div class="row_right">
+                            <input type="text" id="owner" name="owner" value="<%= skin.owner %>">
+                        </div>
+                        
+                    </div>
+                    <div class="edit_row">
+                        <div class="row_left">
+                            <label>Details</label>
+                        </div>
+                        <div class="row_right">
+                            <textarea name="desc" ><%= skin.desc %></textarea>
+                        </div>
+                        
+                    </div>
+                   
+                   <div class="edit_row">
+                        <input type="submit" value="Update Trade" />
+
+                   </div>
+                    
+                </form>
+            </div>
+        </main>
+  <%- include('../partials/footer.ejs') %>

@@ -1,0 +1,27 @@
+<%- include('../partials/header.ejs') %>
+<% const categories = []; %>
+<% skins.forEach( skin => { %>
+<% if(categories.indexOf(skin.category) == -1){ %>
+<% categories.push(skin.category)%>
+<% }}) %>
+
+<main class="main_trade">
+        <div class="sections_container">
+            <% if(skins.length) { %>
+                <% categories.forEach( category => { %>
+                <section class="Rifles">
+                    <header><h3><%= category.toUpperCase() %></h3></header>
+                    <ul>
+                        <% skins.forEach(skin => { %>
+                            <% if(skin.category == category) { %>
+                        <li><a href="/trades/<%= skin.id %>"><%= skin.skin_name %></a></li>
+                            <% } %>
+                        <% }) %>
+                    </ul>
+                </section>
+                <% }) %>
+            <% } %>
+        </div>
+        
+    </main>
+   <%- include('../partials/footer.ejs') %>

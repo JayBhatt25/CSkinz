@@ -1,0 +1,13 @@
+.main_edit {
+    height: 76.5vh;
+    width: 100%;
+    overflow: scroll;
+}
+
+.edit_container {
+    position: relative;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    top: 10%;
+}
