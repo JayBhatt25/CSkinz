@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
-
+const mongoose = require('mongoose');
 const app = express();
 let port = 8080;
 let host = 'localhost';
@@ -12,6 +12,13 @@ app.use(morgan('tiny'));
 app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 
+mongoose.connect('mongodb://localhost:27017/skinsdb',{useNewUrlParser:true,useUnifiedTopology:true})
+.then(()=> {
+	app.listen(port, host, (req, res) => {
+		console.log('Listening on port '+ port);
+	});
+})
+.catch(err => console.log(err))
 
 const tradeRouter = require('./routes/tradeRouter.js');
 const mainRouter = require('./routes/mainRouter.js');
@@ -40,6 +47,4 @@ app.use((err,req,res,next)=>{
    
 });
 
-app.listen(port, host, (req, res) => {
-    console.log('Listening on port '+ port);
-});
+

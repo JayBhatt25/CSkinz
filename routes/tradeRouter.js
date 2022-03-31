@@ -1,5 +1,4 @@
 const express = require('express');
-const { v4:uuid } = require("uuid");
 const router = express.Router();
 
 const controller = require('../controllers/tradeController.js')
