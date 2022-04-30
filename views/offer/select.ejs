@@ -1,0 +1,23 @@
+<%- include('../partials/header.ejs') %>
+
+<main class="select_skin">
+    <div class="options_container">
+        <h5>SELECT YOUR SKIN -</h5>
+        <% result.forEach(skin => { %>
+            <% if(skin.owner == user && skin.status != 'pending'){ %>
+                <div class="option">
+                    <div class="option_left">
+                        <h6><%=skin.skin_name%></h6>
+                    </div>
+                    <div class="option_right">
+                        <a href="/offer/<%= item1 %>/<%= skin.id %>" class="btn btn-success">Select</a>
+                    </div>
+                </div>
+            <% } %>
+        <% }) %>
+    </div>
+    
+</main>
+
+
+<%- include('../partials/footer.ejs') %>

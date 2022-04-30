@@ -1,0 +1,38 @@
+<%- include('../partials/header.ejs')%>
+
+
+<main class="signup">
+    <div class="signup_container">
+        <form class="signup_form" action="/users/new" method="POST">
+            <a href="#"><img class="signup_logo" alt="logo" src="/images/logo.svg" /></a>
+            <div class="signup_field">
+                <label class="label" for="firstName">First Name</label><br>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="signup_field">
+                <label class="label" for="lastName">Last Name</label><br>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+            <div class="signup_field">
+                <label class="label" for="email">Email</label><br>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="signup_field">
+                <label class="label" for="password">Password</label><br>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="signup_field">
+                <label class="label" for="password">Confirm Password</label><br>
+                <input type="password" id="cpassword" name="cpassword" required>
+            </div>
+            <button class="signup_btn btn btn-success">Sign Up</button><br>
+            <p class="newuser">Already have an account? <a href="/users/login">Log in</a></p>
+        </form>
+    </div>
+</main>
+   
+
+
+
+
+<%- include('../partials/footer.ejs')%>

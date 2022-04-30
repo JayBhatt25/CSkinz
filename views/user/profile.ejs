@@ -1,0 +1,84 @@
+<%- include('../partials/header.ejs') %>
+      <main>
+            <div class="profile">
+                <div class="profile_container">
+                   <% if(user){ %>
+                        <h3 class="profile_greeting">Welcome, <%= user.firstName %> <%= user.lastName %></h3>
+                        <div class="profile_tradesContainer">
+                            <%if(trades.length > 0){%>
+                                <table>
+                                    <tr>
+                                        <th class="table_data">Title</th>
+                                        <th class="table_data">Category</th>
+                                        <th class="table_data">Status</th>
+                                        <th class="table_data">Action</th>
+                                    </tr>
+                                <%trades.forEach(trade => {%>
+                                    <tr>
+                                        <td class="table_data"> <%=trade.skin_name%></td>
+                                        <td class="table_data"> <%=trade.category%></td>
+                                        <td class="table_data"><%=trade.status%></td>
+                                        <td class="table_data">
+                                            <form>
+                                                <button type="submit" formmethod="get" formaction = "/trades/<%= trade.id %>/edit" class="btn btn-primary">Edit</button>
+                                                <button type="submit" formmethod="post" formaction = "/trades/<%= trade.id %>?_method=DELETE" class="btn btn-danger" >Delete</button>
+                                                <% offers.forEach(offer => { %>
+                        
+                                                    <% if(offer.oItem.equals(trade.id) && trade.status == "pending"){ %>
+                                                        <button class="btn btn-danger" type="submit" formmethod="post" formaction = "/offer/<%= offer.id %>?_method=DELETE" >Withdraw</button>
+                        
+                                                    <%}%>
+                                                <%})%>
+                                            </form>
+                                        </td>
+                                   </tr>
+                                <%}) %>
+                            </table>
+                            <%} else {%>
+                                <p>You do not have any listed items at the moment.</p>
+                            <%}%>
+                            
+                        </div>
+                         
+                        </table>
+                        
+                        <% if(offers.length > 0){ %>
+                            <h3 class="profile_greeting">Your Offers</h3>
+                            <table>
+                                <tr>
+                                    <th class="table_data">Offered Item</th>
+                                    <th class="table_data">For Your</th>
+                                    <th class="table_data">Status</th>
+                                    <th class="table_data">Action</th>
+                                </tr>
+        
+                            
+                            <% offers.forEach(offer => { %>
+                                <% if(offer.oFor.owner.equals(user._id)){ %>
+                                    <tr>
+                                        <td class="table_data"><%=offer.oItem.skin_name%></td>
+                                        <td class="table_data"><%=offer.oFor.skin_name%></td>
+                                        <td class="table_data"><%=offer.oItem.status%></td>
+                                        <td class="table_data">
+                                            <form>
+                                                <button type="submit" formmethod="post" formaction = "/offer/<%= offer.id %>/accept?_method=PUT" class="btn btn-primary">Accept</button>
+                                                <button type="submit" formmethod="post" formaction = "/offer/<%= offer.id %>/reject?_method=PUT"  class="btn btn-danger" >Reject</button>
+                        
+                                            </form>
+                                        </td>
+                                    </tr>
+    
+                                <%}%>
+                            <%})%>
+                        </table>
+                        <% } %>
+                       
+                   <% } else { %>
+                        <h2>Please Login</h2>
+                    <%}%>
+                    
+                </div>
+            
+            </div>
+      </main>
+<%- include('../partials/footer.ejs') %>

@@ -1,0 +1,26 @@
+.select_skin {
+    height: 75.6vh;
+    width: 100%;
+    padding: 20px;
+}
+
+.options_container {
+    height: auto;
+    width: 70%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+    top: 15%;
+    padding: 30px;
+    border: 3px solid #ebebeb;
+}
+
+.option {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ebebeb;
+}

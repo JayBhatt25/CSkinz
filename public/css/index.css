@@ -138,7 +138,7 @@ footer {
     height: 60px;
 }
 
-.general_nav > a {
+.general_nav a, .user_right > a {
     text-decoration: none;
     font-size: 15px;
     height: 20%;
@@ -147,7 +147,7 @@ footer {
    
 }
 
-.general_nav > a:hover {
+.general_nav > a:hover, .user_right > a:hover {
     color: lightgray;
 }
 .user_left {
@@ -173,3 +173,21 @@ footer {
     color: white;
  
 }
+
+.success {
+    margin: 20px auto;
+    width: 70%;
+    background-color: rgb(78, 221, 78);
+    color: #fff;
+    text-align: center;
+    padding: 10px 10px;
+  }
+  
+  .error {
+    margin: 20px auto;
+    width: 70%;
+    background-color: red;
+    color: #fff;
+    text-align: center;
+    padding: 10px 10px;
+  }

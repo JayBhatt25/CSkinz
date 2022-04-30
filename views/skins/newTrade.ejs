@@ -7,7 +7,7 @@
                             <label>Category</label>
                         </div>
                         <div class="row_right">
-                            <input type="text" id="category" name="category" placeholder="Enter Category">
+                            <input class="newTrade_text" type="text" id="category" name="category" placeholder="Enter Category" required>
                         </div>
                         
                     </div>
@@ -16,7 +16,7 @@
                             <label>Skin</label>
                         </div>
                         <div class="row_right">
-                            <input type="text" id="skinname" name="skin_name" placeholder="Enter Skin Name">
+                            <input class="newTrade_text" type="text" id="skinname" name="skin_name" placeholder="Enter Skin Name" required>
                         </div>
                         
                     </div>
@@ -25,25 +25,17 @@
                             <label>Image</label>
                         </div>
                         <div class="row_right">
-                            <input type="text" id="imglink" name="img" placeholder="Enter image link">
+                            <input class="newTrade_text" type="text" id="imglink" name="img" placeholder="Enter image link" required>
                         </div>
                         
                     </div>
-                    <div class="newTrade_row">
-                        <div class="row_left">
-                            <label>Owner</label>
-                        </div>
-                        <div class="row_right">
-                            <input type="text" id="owner" name="owner" placeholder="Enter Owner">
-                        </div>
                         
-                    </div>
                     <div class="newTrade_row">
                         <div class="row_left">
                             <label>Details</label>
                         </div>
                         <div class="row_right">
-                            <textarea name="desc" placeholder="Enter Details.."></textarea>
+                            <textarea name="desc" placeholder="Enter Details.." required minlength="40"></textarea>
                         </div>
                         
                     </div>

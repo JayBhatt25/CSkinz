@@ -1,0 +1,63 @@
+.signup {
+    height: 76.6vh;
+    width: 100%;
+    overflow: scroll;
+}
+
+.signup_container {
+    border: 3px solid #ebebeb;
+    /* height: 97%; */
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    top: 3%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.signup_logo {
+    height: 70px;
+    left: 45%;
+    position: relative;
+}
+.signup_form {
+    display: flex;
+    flex-direction: column;
+}
+.signup_field{
+    display:flex;
+    padding: 10px 20px;
+}
+
+.signup_field > input {
+    width: 70%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    position: relative;
+
+}
+
+ .signup_btn {
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 3%;
+}
+
+.newuser{
+    margin-left: auto;
+    margin-right: auto;
+}
+.label {
+    width: 20%;
+    
+}
+
+.signup_form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}

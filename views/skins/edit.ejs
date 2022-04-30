@@ -7,7 +7,7 @@
                             <label>Category</label>
                         </div>
                         <div class="row_right">
-                            <input type="text" id="category" name="category" value="<%= skin.category %>">
+                            <input class="edit_text" type="text" id="category" name="category" value="<%= skin.category %>" required >
                         </div>
                         
                     </div>
@@ -16,7 +16,7 @@
                             <label>Skin</label>
                         </div>
                         <div class="row_right">
-                            <input type="text" id="skinname" name="skin_name" value="<%= skin.skin_name %>" >
+                            <input class="edit_text" type="text" id="skinname" name="skin_name" value="<%= skin.skin_name %>" required >
                         </div>
                         
                     </div>
@@ -25,25 +25,17 @@
                             <label>Image</label>
                         </div>
                         <div class="row_right">
-                            <input type="text" id="imglink" name="img" value="<%= skin.img %>">
+                            <input class="edit_text" type="text" id="imglink" name="img" value="<%= skin.img %>" required >
                         </div>
                         
                     </div>
-                    <div class="edit_row">
-                        <div class="row_left">
-                            <label>Owner</label>
-                        </div>
-                        <div class="row_right">
-                            <input type="text" id="owner" name="owner" value="<%= skin.owner %>">
-                        </div>
-                        
-                    </div>
+                   
                     <div class="edit_row">
                         <div class="row_left">
                             <label>Details</label>
                         </div>
                         <div class="row_right">
-                            <textarea name="desc" ><%= skin.desc %></textarea>
+                            <textarea name="desc" required  minlength="50"><%= skin.desc %></textarea>
                         </div>
                         
                     </div>

@@ -15,13 +15,8 @@ exports.newTrade=(req,res)=>{
 
 exports.trade=(req,res,next)=>{
 	const id = req.params.id;
-	if(!id.match(/^[0-9a-fA-F]{24}$/))
-    {
-        let err= new Error('Invalid story id');
-        err.status=400;
-        return next(err);
-    }
-	model.findById(id)
+	
+	model.findById(id).populate('owner')
 	.then((skin) => {
 		if(skin){
 			res.render('./skins/trade',{skin});
@@ -36,12 +31,6 @@ exports.trade=(req,res,next)=>{
 
 exports.edit=(req,res,next)=>{
 	const id = req.params.id;
-	console.log(id);
-	if(!id.match(/^[0-9a-fA-F]{24}$/)){
-		let err = new Error("Invalid story id")
-		err.status = 400;
-		next(err)
-	}
 	model.findById(id)
 	.then(skin => {
 		if(skin){
@@ -55,31 +44,25 @@ exports.edit=(req,res,next)=>{
 	
 };
 
-exports.create=(req,res)=>{
+exports.create=(req,res, next)=>{
 	
 	let skinBody = new model(req.body);
-	
+	skinBody.owner = req.session.user;
+	skinBody.status = 'available';
 	skinBody.save()
 	.then(skin =>{
 		res.redirect('/trades')
 	})
 	.catch(err=>{
         if(err.name === 'ValidationError'){
-            err.status= 400;
+            req.flash('error', err.message);
+            res.redirect('back');
         }
-        next(err);
     }); 
 };
 
 exports.delete=(req,res,next)=>{
 	let id = req.params.id;
-
-    if(!id.match(/^[0-9a-fA-F]{24}$/))
-    {
-        let err= new Error('Invalid skin id');
-        err.status=400;
-        return next(err);
-    }
 
     model.findByIdAndDelete(id,{useFindAndModify: false})
     .then(skin=>{
@@ -99,28 +82,25 @@ exports.update=(req,res,next)=>{
 	let skin = req.body;
     let id = req.params.id;
 
-    if(!id.match(/^[0-9a-fA-F]{24}$/))
-    {
-        let err= new Error('Invalid skin id');
-        err.status=400;
-        return next(err);
-    }
-
     model.findByIdAndUpdate(id,skin,{useFindAndModify: false, runValidators:true})
     .then(skin=>{
         if(skin){
+			req.flash('success','Trade has been successfully updated!')
             res.redirect('/trades/'+id);
         }
         else{
-         let   err = new Error('Cannot find a story with id ' + id);
+         let   err = new Error('Cannot find a skin with id ' + id);
             err.status = 404;
             next(err);
         }
     })
     .catch(err=>{
-        if(err.name=== 'ValidationError')
-        err.status=400;
-        next(err);
+        if(err.name=== 'ValidationError'){
+            req.flash('error', err.message);
+            res.redirect('back');
+        }
+        
    
 	});
 };	
+

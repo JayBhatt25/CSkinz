@@ -8,6 +8,10 @@
         <link rel="stylesheet" href="/css/trade.css" type="text/css">
         <link rel="stylesheet" href="/css/newtrade.css" type="text/css">
         <link rel="stylesheet" href="/css/edit.css" type="text/css">
+        <link rel="stylesheet" href="/css/profile.css" type="text/css">
+        <link rel="stylesheet" href="/css/login.css" type="text/css">
+        <link rel="stylesheet" href="/css/signup.css" type="text/css">
+        <link rel="stylesheet" href="/css/select.css" type="text/css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Roboto:wght@500&display=swap" rel="stylesheet">
@@ -24,14 +28,23 @@
                      <h2>CSkinz</h2>
                  </div>
                  <div class="user_right">
-                     <a href="/trades/newTrade" class="newtrade">Start Trading!</a>
+                     <a href="/trades/newTrade" class="newtrade">Create a new trade</a>
                      <!-- <img class="right_arrow" src="images/rightpointer.svg" -->
                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
                          <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
                        </svg>
-                     <a>Login</a>
-                     |
-                     <a>Sign up</a>
+                     
+                    <% if(!user){ %>
+                        <a href="/users/login">Login</a>
+                        |
+                        <a href="/users/new">Sign up</a>
+                    <% } else { %>
+                        <a href="/users/profile">Profile</a>
+                        |
+                        <a href="/users/logout">logout</a>
+                    <% } %>
+                     
+                     
                  </div>
                 </div>
                 <div class="general_nav">
@@ -40,3 +53,14 @@
             </div>
         </nav>
      
+        <% if(errorMessages.length > 0){ %>
+            <% errorMessages.forEach(message => { %>
+                 <div class="error"><%=message%></div>
+             <% }) %>
+        <% } %>
+     
+        <% if(successMessages.length > 0){ %>
+         <% successMessages.forEach(message => { %>
+              <div class="success"><%=message%></div>
+          <% }) %>
+     <% } %>

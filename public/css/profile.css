@@ -1,0 +1,57 @@
+.profile {
+    height: auto;
+    width: 100%;
+}
+
+.profile_container {
+    border: 2px solid #ebebeb;
+    height:auto;
+    width: 70%;
+    margin-left:auto;
+    margin-right: auto;
+    top: 10%;
+    margin-bottom: 50px;
+    position: relative;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.profile_greeting {
+    text-align: center;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+}
+
+.profile_tradesContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.trade{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #ebebeb;
+}
+
+.trade:hover{
+    background-color:rgb(190, 50, 50);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.trade > a {
+    text-decoration: none;
+}
+.trade > a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.table_data {
+    border: 1px solid #ebebeb;
+    padding: 10px;
+}

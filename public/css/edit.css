@@ -11,3 +11,63 @@
     margin-right: auto;
     top: 10%;
 }
+
+.edit_form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+   
+}
+.edit_form > div {
+    padding-bottom: 3%;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+  }
+  
+
+  .edit_text, .row_right > textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
+
+  .row_left {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+  }
+
+  .row_right {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+  }
+
+  input[type=submit]{
+
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+
+  }
+
+  @media screen and (max-width: 600px) {
+    .row_left, .row_right, input[type=submit] {
+      width: 100%;
+      margin-top: 0;
+    }
+
+    .edit_form {
+        height: 70%;
+    }
+  }

@@ -1,0 +1,24 @@
+<%- include('../partials/header.ejs')%>
+
+<div class="login">
+    <div class="login_container">
+        <a href="#"><img class="profile_logo" alt="logo" src="/images/logo.svg" /></a>
+        <form action="/users/login" method="POST">
+            <div class="login_field">
+                <label class="label" for="email">Email</label><br>
+                <input type="email" id="email" name="email" required><br><br>
+            </div>
+            <div class="login_field">
+                <label class="label" for="password">Password</label><br>
+                <input type="password" id="password" name="password" required><br><br>
+            </div>
+            
+            <button class=" login_btn btn btn-success">Login</button><br>
+        </form>
+        <p class="newuser">Don't have an account yet? <a href="/users/new">Sign up</a></p>
+    </div>
+</div>
+   
+
+
+<%- include('../partials/footer.ejs')%>

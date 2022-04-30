@@ -9,23 +9,31 @@
                         </div>
                         <div class="skin_name">
                             <h3><%= skin.skin_name %></h3>
-                            owner <h4><%= skin.owner %></h4>
+                            owner <h4><%= skin.owner.firstName %> <%= skin.owner.lastName %></h4>
                             <% if(skin.createdAt) { %>
-                                created at <h6><%= skin.createdAt %></h6>
+                                <% const time = skin.createdAt.toString().split(' ')  %>
+                               
+                                created at <h6><%= time[1] %> <%= time[2] %> <%= time[3] %> , <%= time[4] %>  <%= time[5] %></h6>
                             <% } %>
                         </div>
                        
                     </div>
-
-                    <div class="header_right">
-                        <p>Are you interested in this skin?</p>
-                        <div class="right_buttons">
-                            <a href="#" class="btn btn-success" >Trade it</a>
-                            <a href="#" class="btn btn-primary">Rate it</a>
+                    <%if(!skin.owner._id.equals(user)){%>
+                        <div class="header_right">
+                            <p>Are you interested in this skin?</p>
+                            <div class="right_buttons"> 
+                                <% if(skin.status == 'pending'){ %>
+                                    <a href="#" class="btn btn-success" >offer pending</a>
+                                <%} else {%>
+                                    <a href="/offer/<%= skin.id%>" class="btn btn-success" >Trade</a>
+                                <%}%>
+                                    <a href="/users/profile" class="btn btn-primary">Watch</a>
+                            </div>
+    
                         </div>
-
-                    </div>
-
+                    <%} else {%>
+                        
+                    <%} %>
                 </div>
 
                 <div class="info_desc">
@@ -36,13 +44,16 @@
                         <p><%= skin.desc %></p>
                        
                     </div>
-                    <div class="opr">
-                        <form>
-                            <button type="submit" formmethod="get" formaction = "/trades/<%= skin.id %>/edit" class="btn btn-primary">Edit</button>
-                            <button type="submit" formmethod="post" formaction = "/trades/<%= skin.id %>?_method=DELETE" class="btn btn-danger" >Delete</button>
-                        </form>
-                        
-                    </div>
+                    <% console.log(skin.owner._id) %>
+                    <% if(skin.owner._id.equals(user)){ %>
+                        <div class="opr">
+                            <form>
+                                <button type="submit" formmethod="get" formaction = "/trades/<%= skin.id %>/edit" class="btn btn-primary">Edit</button>
+                                <button type="submit" formmethod="post" formaction = "/trades/<%= skin.id %>?_method=DELETE" class="btn btn-danger" >Delete</button>
+                            </form>
+                            
+                        </div>
+                    <% } %>
 
                 </div>
 
