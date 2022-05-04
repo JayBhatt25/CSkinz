@@ -1,5 +1,6 @@
 const model = require('../models/skin');
-
+const offer = require('../models/offer');
+const user = require('../models/user');
 exports.trades=(req,res, next)=>{
 	model.find()
 	.then(((skins) => {
@@ -15,11 +16,13 @@ exports.newTrade=(req,res)=>{
 
 exports.trade=(req,res,next)=>{
 	const id = req.params.id;
-	
-	model.findById(id).populate('owner')
-	.then((skin) => {
+	const userid = req.session.user;
+	console.log(userid)
+	Promise.all([model.findById(id).populate('owner'), offer.find(),user.findById(userid)])
+	.then((result) => {
+		const [skin,offer,curruser] = result;
 		if(skin){
-			res.render('./skins/trade',{skin});
+			res.render('./skins/trade',{skin,offer,curruser});
 		} else {
 			let err = new Error("No skin with ID = " + id);
 			err.status = 404;
@@ -51,6 +54,7 @@ exports.create=(req,res, next)=>{
 	skinBody.status = 'available';
 	skinBody.save()
 	.then(skin =>{
+		req.flash('success', 'Item created successfully')
 		res.redirect('/trades')
 	})
 	.catch(err=>{
@@ -63,19 +67,52 @@ exports.create=(req,res, next)=>{
 
 exports.delete=(req,res,next)=>{
 	let id = req.params.id;
+	
+		offer.find({$or:[{oItem:id}, {oFor: id}]})
+		.then(foundoffer => {
+			if(foundoffer.length > 0){
+				foundoffer.forEach(foffer => {
+					Promise.all([model.findByIdAndUpdate(foffer.oItem, {status: 'available'}),model.findByIdAndUpdate(foffer.oFor, {status: 'available'})])
+					.then(result => {
+						offer.findByIdAndDelete(foundoffer)
+						.then( abc => {
+							model.findByIdAndDelete(id,{useFindAndModify: false})
+							.then(skin=>{
+								if(skin){
+									req.flash('success','Item Deleted.')
+									res.redirect('/trades');
+								}
+								else{
+									let err = new Error('Cannot find a skin with id ' + id);
+									err.status = 404;
+								return next(err);
+								}
+							
+							})
+							.catch(err => next(err))
+						}) .catch(err => next(err))
+					}).catch(err => next(err))
+				})
+			} else {
+				model.findByIdAndDelete(id,{useFindAndModify: false})
+							.then(skin=>{
+								if(skin){
+									req.flash('success','Item Deleted.')
+									res.redirect('/trades');
+								}
+								else{
+									let err = new Error('Cannot find a skin with id ' + id);
+									err.status = 404;
+								return next(err);
+								}
+							
+							})
+							.catch(err => next(err))
+			}
 
-    model.findByIdAndDelete(id,{useFindAndModify: false})
-    .then(skin=>{
-        if(skin){
-            res.redirect('/trades');
-        }
-        else{
-            let err = new Error('Cannot find a skin with id ' + id);
-            err.status = 404;
-           return next(err);
-        }
-    })
-    .catch(err=>next(err));
+			
+		}).catch(err => next(err));
+   
 };
 
 exports.update=(req,res,next)=>{

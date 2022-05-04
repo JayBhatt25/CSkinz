@@ -4,14 +4,15 @@ const bcrypt = require('bcrypt');
 const userSchema = new Schema({
     firstName: {type: String, required: [true, 'FirstName is required']},
     lastName: {type: String, required: [true, 'LastName is required']},
-    email: {type: String, required: [true, 'Email is required'], unique: true},
+    email: {type: String, required: [true, 'Email is required'], unique: true, index: true},
     password: {type: String, required: [true, 'Password is required']},
-    offers: {type: [Schema.Types.ObjectId], ref: 'Skin' },
-    watch: {type: [Schema.Types.ObjectId], ref: 'Skin' }
-});
+    oCreated: {type: [Schema.Types.ObjectId], ref: 'Offer'},
+    watch: {type: [Schema.Types.ObjectId], ref: 'Skin'}
+}, {autoIndex: false});
 
 userSchema.pre('save', function(next){
     let user = this;
+     
     if(!user.isModified('password'))
         return next();
     bcrypt.hash(user.password, 10)

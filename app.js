@@ -15,7 +15,7 @@ app.use(morgan('tiny'));
 app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 
-mongoose.connect('mongodb://localhost:27017/skinsdb',{useNewUrlParser:true,useUnifiedTopology:true})
+mongoose.connect('mongodb://localhost:27017/skinsdb',{useNewUrlParser:true,useUnifiedTopology:true })
 .then(()=> {
 	app.listen(port, host, (req, res) => {
 		console.log('Listening on port '+ port);
@@ -32,7 +32,6 @@ app.use(session({
 }));
 app.use(flash());
 app.use((req,res, next) => {
-	console.log(req.session);
 	res.locals.user = req.session.user || null;
     res.locals.successMessages = req.flash('success');
     res.locals.errorMessages = req.flash('error');
@@ -43,12 +42,14 @@ const tradeRouter = require('./routes/tradeRouter.js');
 const mainRouter = require('./routes/mainRouter.js');
 const userRouter = require('./routes/userRouter.js')
 const offerRouter = require('./routes/offerRouter.js')
+const watchRouter = require('./routes/watchRouter.js')
 
 
 
 app.use('/users',userRouter);
 app.use('/trades',tradeRouter);
 app.use('/offer',offerRouter);
+app.use('/watch',watchRouter);
 app.use('',mainRouter);
 
 
@@ -58,16 +59,16 @@ app.use((req,res,next)=>{
 	next(err);
 });
 
-// app.use((err,req,res,next)=>{
-// 	if(!err.status){
-// 		err.status = "500";
-// 		err.message = "Internal Server Error";
-// 	}
-// 	res.status = err.status;
-// 	res.render('error',{error:err});
-//    console.log(err.message);
-//    next();
+app.use((err,req,res,next)=>{
+	if(!err.status){
+		err.status = "500";
+		err.message = "Internal Server Error";
+	}
+	res.status = err.status;
+	res.render('error',{error:err});
+   console.log(err.message);
+   next();
    
-// });
+});
 
 

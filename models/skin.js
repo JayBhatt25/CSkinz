@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const skinsSchema = new Schema({
     skin_name: {type:String, required:[true, 'Skin name is required']},
-    status: {type: String, enum: ['available', 'pending']},
+    status: {type: String, enum: ['available', 'pending', 'traded']},
     category: {type:String, required:[true, 'Category is required']},
     owner:{type:Schema.Types.ObjectId, ref: 'User'},
     offereditem: {type: Schema.Types.ObjectId, ref:'Skin'},

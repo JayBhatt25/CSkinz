@@ -22,9 +22,9 @@
                                             <form>
                                                 <button type="submit" formmethod="get" formaction = "/trades/<%= trade.id %>/edit" class="btn btn-primary">Edit</button>
                                                 <button type="submit" formmethod="post" formaction = "/trades/<%= trade.id %>?_method=DELETE" class="btn btn-danger" >Delete</button>
-                                                <% offers.forEach(offer => { %>
-                        
-                                                    <% if(offer.oItem.equals(trade.id) && trade.status == "pending"){ %>
+                                                <% offersbyyou.forEach(offer => { %>
+                                                   
+                                                    <% if(offer.byUser.equals(user._id) && offer.oItem?._id.equals(trade.id) && offer.oStatus == 'made' ){ %>
                                                         <button class="btn btn-danger" type="submit" formmethod="post" formaction = "/offer/<%= offer.id %>?_method=DELETE" >Withdraw</button>
                         
                                                     <%}%>
@@ -43,7 +43,7 @@
                         </table>
                         
                         <% if(offers.length > 0){ %>
-                            <h3 class="profile_greeting">Your Offers</h3>
+                            <h3 class="profile_greeting">Offers for you</h3>
                             <table>
                                 <tr>
                                     <th class="table_data">Offered Item</th>
@@ -54,7 +54,7 @@
         
                             
                             <% offers.forEach(offer => { %>
-                                <% if(offer.oFor.owner.equals(user._id)){ %>
+    
                                     <tr>
                                         <td class="table_data"><%=offer.oItem.skin_name%></td>
                                         <td class="table_data"><%=offer.oFor.skin_name%></td>
@@ -68,11 +68,72 @@
                                         </td>
                                     </tr>
     
-                                <%}%>
+                                
                             <%})%>
                         </table>
                         <% } %>
-                       
+
+                        <% if(user.watch.length > 0){ %>
+                            <h3 class="profile_greeting">Your Watch List</h3>
+                            <table>
+                                <tr>
+                                    <th class="table_data">Title</th>
+                                    <th class="table_data">Category</th>
+                                    <th class="table_data">Status</th>
+                                    <th class="table_data">Action</th>
+                                </tr>
+        
+                                <%let uniquelist = new Map();%>
+                                <%let count = 0%>
+                            <% user.watch.forEach(skin => { %>
+                                
+                              
+                               
+
+                                    <tr>
+                                        <td class="table_data"><%=skin.skin_name%></td>
+                                        <td class="table_data"><%=skin.category%></td>
+                                        <td class="table_data"><%=skin.status%></td>
+                                        <td class="table_data">
+                                            <form>
+                                                <button type="submit" formmethod="get" formaction = "/trades/<%= skin.id %>" class="btn btn-primary">View</button>
+                                                <button type="submit" formmethod="get" formaction = "/watch/<%= skin.id %>/remove" class="btn btn-danger">Unwatch</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+    
+                                
+                            <%})%>
+                            
+                        </table>
+                        <% } %>
+
+                        <% if(offersbyyou.length > 0){ %>
+                            <h3 class="profile_greeting">Track offers made by you</h3>
+                            <table>
+                                <tr>
+                                    <th class="table_data">Wanted Item</th>
+                                    <th class="table_data">Offered by you</th>
+                                    <th class="table_data">Status</th>
+                                    
+                                </tr>
+        
+                            
+                            <% offersbyyou.forEach(offer => { %>
+                    
+                                    <tr>
+                                        <td class="table_data"><%=offer.oFor?.skin_name%></td>
+                                        <td class="table_data"><%=offer.oItem?.skin_name%></td>
+                                        <td class="table_data"><%=offer.oStatus%></td>
+                                       
+                                    </tr>
+    
+                               
+                            <%})%>
+                        </table>
+                        <% } %>
+
+                     
                    <% } else { %>
                         <h2>Please Login</h2>
                     <%}%>

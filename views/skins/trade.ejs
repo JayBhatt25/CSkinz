@@ -20,14 +20,42 @@
                     </div>
                     <%if(!skin.owner._id.equals(user)){%>
                         <div class="header_right">
+                           
                             <p>Are you interested in this skin?</p>
-                            <div class="right_buttons"> 
-                                <% if(skin.status == 'pending'){ %>
-                                    <a href="#" class="btn btn-success" >offer pending</a>
+                            <div class="right_buttons">
+                                <% var inoffer; %>
+                                
+                                <%offer.forEach(offer => {%>
+                                   
+                                    <%if(skin._id.equals(offer.oItem._id) || skin._id.equals(offer.oFor._id)  ){%>
+                                        <%if(offer.oStatus == 'made'){%>
+                                            <% inoffer=1; %>
+                                        <%}%>
+                                        
+                                        
+                                    <%} else {%>
+                                        <% inoffer=0; %>
+                                        
+                                    <%}%>
+                                <%})%>
+                            
+                                <%if(inoffer==true){%>
+                                    <a href="#" class="btn btn-success">offer pending</a>
                                 <%} else {%>
-                                    <a href="/offer/<%= skin.id%>" class="btn btn-success" >Trade</a>
+                                    <a href="/offer/<%= skin.id%>" class="btn btn-success">Trade</a>
                                 <%}%>
-                                    <a href="/users/profile" class="btn btn-primary">Watch</a>
+                                    <% let inwatchlist = false; %>
+                                   <%curruser?.watch?.forEach(item => { %>
+                                       <%if(skin._id.equals(item)){%>
+                                            <% inwatchlist = true; %>       
+                                       <%}%>
+                                   <%})%>
+                                   <%if(inwatchlist){%>
+                                    <a href="/watch/<%= skin.id%>/remove" class="btn btn-primary">Unwatch</a>   
+                                   <%} else {%>
+                                    <a href="/watch/<%= skin.id%>" class="btn btn-primary">Watch</a>
+                                   <%}%>
+                                    
                             </div>
     
                         </div>

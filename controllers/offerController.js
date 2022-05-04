@@ -31,7 +31,7 @@ exports.offerstep3 = (req, res, next) => {
     const item2 = req.params.item2;
     console.log("from offer step3 : "+item1);
     console.log("from offer step3 : "+item2);
-   
+   const curruser = req.session.user;
     currOffer = {};
     skin.findById(item1)
     .then(founditem => {
@@ -44,7 +44,8 @@ exports.offerstep3 = (req, res, next) => {
         .then(result =>{
             Promise.all([skin.findByIdAndUpdate(result.oFor, {status : "pending"}), skin.findByIdAndUpdate(result.oItem, {status : "pending"})])
             .then(result1 => {
-                console.log("Success");
+                offer.findByIdAndUpdate(result._id,{oStatus: 'made'}).then(abc => console.log("Success") ).catch(err=> next(err))
+                
             })
             .catch(err => next(err))
             req.flash('success','Offer Made.')
@@ -59,7 +60,7 @@ exports.offerstep3 = (req, res, next) => {
                 return res.redirect('/users/profile');
             }
             next(err);
-            next(err)
+          
         }); 
     })
     .catch(err => next(err))
@@ -69,17 +70,19 @@ exports.offerstep3 = (req, res, next) => {
 
 exports.withdraw = (req, res, next) => {
     let offer1 = req.params.offer;
-
+    const curruser = req.session.user;
     offer.findById(offer1)
     .then(result =>{
         Promise.all([skin.findByIdAndUpdate(result.oFor, {status : "available"}), skin.findByIdAndUpdate(result.oItem, {status : "available"})])
         .then(result1 => {
             console.log("Success");
-            offer.findByIdAndDelete(offer1).then(abc => res.redirect('/')).catch(err => next(err))
+            offer.findByIdAndDelete(offer1)
+            .then(abc => res.redirect('/'))
+            .catch(err => next(err))
         })
         .catch(err => next(err))
         req.flash('success','Offer withdrawn.')
-        res.redirect('/users//profile')
+        res.redirect('/users/profile')
     })
     .catch(err=>{
     next(err)
@@ -96,9 +99,9 @@ exports.accept = (req, res, next) => {
         .then(fskins => {
             const [userskin, offeredskin] = fskins;
             let temp = userskin.owner;
-            Promise.all([skin.findByIdAndUpdate(userskin._id, {owner: offeredskin.owner, status: 'available'}), skin.findByIdAndUpdate(offeredskin._id, {owner: temp, status: 'available'})])
+            Promise.all([skin.findByIdAndUpdate(userskin._id, {owner: offeredskin.owner, status: 'traded'}), skin.findByIdAndUpdate(offeredskin._id, {owner: temp, status: 'traded'})])
             .then(newowners => {
-                offer.findByIdAndDelete(offer1)
+                offer.findByIdAndUpdate(offer1, {oStatus: 'accepted'})
                 .then(abc => {
                     req.flash('success','Offer Accepted.')
                     res.redirect('/users/profile')
@@ -126,7 +129,7 @@ exports.reject = (req, res, next) => {
             const [userskin, offeredskin] = fskins;
             Promise.all([skin.findByIdAndUpdate(userskin._id, {status: 'available'}), skin.findByIdAndUpdate(offeredskin._id, {status: 'available'})])
             .then(newowners => {
-                offer.findByIdAndDelete(offer1)
+                offer.findByIdAndUpdate(offer1, {oStatus: 'rejected'})
                 .then(abc => {
                     req.flash('error','Offer Rejected.')
                     res.redirect('/users/profile')

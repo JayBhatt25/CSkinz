@@ -1,6 +1,9 @@
 <%- include('./partials/header.ejs') %>
-<div class = "content">
-    <h4> <%= error.status %> Error</h4> 
-    <p> <%= error.message %></p>
-</div>
+<main class="error_page">
+    <div class = "error_content">
+        <h4> <%= error.status %> Error</h4> 
+        <p> <%= error.message %></p>
+    </div>
+</main>
+
 <%- include('./partials/footer.ejs') %>

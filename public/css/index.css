@@ -191,3 +191,15 @@ footer {
     text-align: center;
     padding: 10px 10px;
   }
+  .error_page {
+    height: 76.6vh;
+    width: 100%;
+  }
+  .error_content {
+      position: relative;
+      width: 9%;
+      height: 100px;
+      margin-left: auto;
+      margin-right: auto;
+      top: 35%;
+  }
