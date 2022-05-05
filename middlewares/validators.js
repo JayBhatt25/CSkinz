@@ -38,7 +38,11 @@ exports.isAuthor = (req, res, next) => {
 
 exports.validateId = (req, res, next) => {
     let id = req.params.id;
-    if(!id.match(/^[0-9a-fA-F]{24}$/))
+    let offeritem1 = req.params.item1;
+    let offeritem2 = req.params.item2;
+    let offerid = req.params.offer;
+    
+    if(!id?.match(/^[0-9a-fA-F]{24}$/) && !offerid?.match(/^[0-9a-fA-F]{24}$/) && !offeritem1?.match(/^[0-9a-fA-F]{24}$/) && !offeritem2?.match(/^[0-9a-fA-F]{24}$/))
     {
         let err= new Error('Invalid skin id');
         err.status=400;
@@ -47,6 +51,8 @@ exports.validateId = (req, res, next) => {
         return next();
     }
 }
+
+
 
 exports.hasLimitExceded = rateLimit({
     windowMS: 60*1000,
@@ -69,7 +75,7 @@ body('password','Password cannot be empty').notEmpty()]
 
 exports.validateSkin = [body('category','Category cannot be empty').notEmpty().trim().escape(),
 body('skin_name','Skin name cannot be empty').notEmpty().trim().escape(),
-body('img','Image link cannot be empty').notEmpty().trim().escape(),
+body('img','Image link cannot be empty').notEmpty().trim(),
 body('desc','Skin details needs to of atleast 40 characters.').isLength({min:40}).trim().escape()]
 exports.validateResult = (req, res, next) => {
     const errors = validationResult(req);
@@ -82,3 +88,4 @@ exports.validateResult = (req, res, next) => {
         return next();
     }
 }
+

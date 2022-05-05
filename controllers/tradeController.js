@@ -17,7 +17,6 @@ exports.newTrade=(req,res)=>{
 exports.trade=(req,res,next)=>{
 	const id = req.params.id;
 	const userid = req.session.user;
-	console.log(userid)
 	Promise.all([model.findById(id).populate('owner'), offer.find(),user.findById(userid)])
 	.then((result) => {
 		const [skin,offer,curruser] = result;
@@ -67,6 +66,7 @@ exports.create=(req,res, next)=>{
 
 exports.delete=(req,res,next)=>{
 	let id = req.params.id;
+	
 	
 		offer.find({$or:[{oItem:id}, {oFor: id}]})
 		.then(foundoffer => {

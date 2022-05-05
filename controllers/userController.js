@@ -55,13 +55,11 @@ exports.verify = (req, res, next) => {
                     res.redirect('/users/profile');
                     next();
                 } else {
-                    //console.log('Wrong password')
                     req.flash('error','Wrong Password!');
                     res.redirect('/users/login')
                 }
             })
         } else {
-            //console.log('Wrong Email')
             req.flash('error','Wrong Email!');
             res.redirect('/users/login')
         }

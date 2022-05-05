@@ -1,72 +1,109 @@
 .main_trade {
     width: 100%;
     height: 76.5vh;
+    overflow: scroll;
+    /* margin-bottom: 50px; */
     /* text-align: center; */
 }
 
 .sections_container{
     position: relative;
-    height: 80%;
-    width: 30%;
+    height: 100%;
+    width: 80%;
     top: 10%;
-    left: 15%;
-    align-items: left;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
 }
-.Rifles > header {
+.category_header  {
+    border-left: 5px solid yellow;
+    border-right: 5px solid yellow;
+    border-top: 2px solid #ebebeb;
+    border-bottom: 2px solid #ebebeb;
+    text-align: center;
+    padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 10px;
     font-size: 25px;
     font-weight: 700;
-}
-.Rifles {
-    display : flex;
-    flex-direction: column;
-    /* align-items: center; */
-}
-.Rifles > ul  {
-
-    list-style-type: none;
+   
 }
 
-.Rifles  > ul > li {
-    padding-bottom: 5px;
+
+
+.skin{
+    height:250px;
+    width:30%;
+    border: 2px solid #ebebeb;
+    /* border-radius: 5%; */
+    margin: 10px 20px;
+    overflow: hidden;
+}
+
+.skin:hover{
+    border: 3px solid #be3232;
+}
+
+.skin_img > img {
+    height: 150px;
+    margin-left: 20%;
     
 }
 
-.Rifles a {
-    text-decoration: none;
-    color: black;
+.skin:hover {
+    cursor: pointer;
 }
-
-.Gloves > header {
-    padding-bottom: 10px;
-    padding-left: 10px;
-    font-size: 25px;
-    font-weight: 700;
-}
-.Gloves {
-    display : flex;
+.category {
+    
+    width: 100%;
+    display: flex;
     flex-direction: column;
-    /* align-items: center; */
-}
-.Gloves > ul  {
-
-    list-style-type: none;
 }
 
-.Gloves  > ul > li {
-    padding-bottom: 5px;
+.category_body {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.skin_img{
+    align-items: center;
+    flex: 0.7;
+}
+.trades_skin_name:hover {
+    color: #fff;
+    transform: scale(1.08)
+}
+
+.trades_skin_name  {
+    padding-top: 5px;
+    flex: 0.3;
+    text-decoration: none;
+    font-weight: 500;
+    border: 3px solid #ebebeb;
+    height: 45px;
+    width: 100%;
+    font-size: 15px;
+    text-align: center;
+    background-color:#be3232;
+    color: white;
+    display: block;
+   
+    
     
 }
 
-.Gloves a {
-    text-decoration: none;
-    color: black;
-
-}
-
-.Gloves a:hover, .Rifles a:hover{
+.skin_top{
+    height: 45px;
+    width: 100%;
+    background-color: rgb(223,221,220);
+    padding-top: 5px;
+    border-bottom-left-radius: 3%;
+    border-bottom-right-radius: 3%;
     color: black;
     font-weight: 500;
+    text-align: center;
 }
+
+
+
 

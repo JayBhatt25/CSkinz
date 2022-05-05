@@ -9,6 +9,7 @@ exports.addToList = (req, res, next) => {
 
     user.findByIdAndUpdate(curruser, {$addToSet: {watch: skinid}})
     .then(founduser => {
+        req.flash('success','Added to watch list.');
         res.redirect('/users/profile');
     })
     .catch(err => next(err))
@@ -20,6 +21,7 @@ exports.removeFromList = (req, res, next) => {
 
     user.findByIdAndUpdate(curruser, {$pull: {watch: skinid}})
     .then(founduser => {
+        req.flash('success','Removed from watch list.');
         res.redirect('/users/profile');
     })
     .catch(err => next(err))

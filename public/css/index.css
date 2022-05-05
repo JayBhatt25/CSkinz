@@ -49,6 +49,7 @@ footer {
     bottom: 0;
     position: fixed;
     width: 100%;
+    
 }
 .footer_left a {
     color: white;
@@ -175,18 +176,18 @@ footer {
 }
 
 .success {
-    margin: 20px auto;
-    width: 70%;
-    background-color: rgb(78, 221, 78);
+    /* margin: 20px auto; */
+    width: 100%;
+    background-color: rgb(81, 188, 81);
     color: #fff;
     text-align: center;
     padding: 10px 10px;
   }
   
   .error {
-    margin: 20px auto;
-    width: 70%;
-    background-color: red;
+    /* margin: 20px auto; */
+    width: 100%;
+    background-color: rgb(209, 91, 91);
     color: #fff;
     text-align: center;
     padding: 10px 10px;

@@ -9,7 +9,7 @@ const skinsSchema = new Schema({
     owner:{type:Schema.Types.ObjectId, ref: 'User'},
     offereditem: {type: Schema.Types.ObjectId, ref:'Skin'},
     img: {type:String, required:[true, 'Image link/path is required']},
-    desc: {type:String, required:[true, 'Description is required'], minlength: [50, 'Minimum 50 characters are required.']},
+    desc: {type:String, required:[true, 'Description is required'], minlength: [40, 'Minimum 40 characters are required.']},
    
 }, {timestamps:true});
 

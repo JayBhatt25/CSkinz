@@ -9,15 +9,31 @@
         <div class="sections_container">
             <% if(skins.length) { %>
                 <% categories.forEach( category => { %>
-                <section class="Rifles">
-                    <header><h3><%= category.toUpperCase() %></h3></header>
-                    <ul>
+                <section class="category">
+                    <div class="category_header">
+                        <header><h3><%= category.toUpperCase() %></h3></header>
+                    </div>
+                    <div class="category_body">
                         <% skins.forEach(skin => { %>
                             <% if(skin.category == category) { %>
-                        <li><a href="/trades/<%= skin.id %>"><%= skin.skin_name %></a></li>
+                                <div class="skin">
+                                    <div class="skin_top">
+                                        <%=skin.skin_name%>
+                                        
+                                    </div>
+                                    
+                                    <div class="skin_img">
+                                        <img src="<%= skin.img%>" alt="<%= skin.skin_name%>">
+                                    </div>
+                                    <a class="trades_skin_name" href="/trades/<%= skin.id %>">Click here</a>
+                                   
+                                    
+                                </div>
+                       
                             <% } %>
                         <% }) %>
-                    </ul>
+                    </div>
+                        
                 </section>
                 <% }) %>
             <% } %>

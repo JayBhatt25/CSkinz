@@ -1,4 +1,6 @@
+
 <%- include('../partials/header.ejs') %>
+
       <main>
             <div class="profile">
                 <div class="profile_container">
@@ -21,7 +23,7 @@
                                         <td class="table_data">
                                             <form>
                                                 <button type="submit" formmethod="get" formaction = "/trades/<%= trade.id %>/edit" class="btn btn-primary">Edit</button>
-                                                <button type="submit" formmethod="post" formaction = "/trades/<%= trade.id %>?_method=DELETE" class="btn btn-danger" >Delete</button>
+                                                <button type="submit"   formmethod="post" formaction = "/trades/<%= trade.id %>?_method=DELETE" class="btn btn-danger" >Delete</button>
                                                 <% offersbyyou.forEach(offer => { %>
                                                    
                                                     <% if(offer.byUser.equals(user._id) && offer.oItem?._id.equals(trade.id) && offer.oStatus == 'made' ){ %>
@@ -83,8 +85,7 @@
                                     <th class="table_data">Action</th>
                                 </tr>
         
-                                <%let uniquelist = new Map();%>
-                                <%let count = 0%>
+                                
                             <% user.watch.forEach(skin => { %>
                                 
                               

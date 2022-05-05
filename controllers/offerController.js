@@ -10,7 +10,7 @@ exports.test = (req, res, next) => {
 exports.offerstep2 = (req, res, next) => {
 	const item1 = req.params.item1;
     const curruser = req.session.user;
-    // console.log("from offer controller : "+item2);
+    
     skins.find({owner: curruser})
     .then(result =>{
         
@@ -23,14 +23,11 @@ exports.offerstep2 = (req, res, next) => {
         
     } )
     .catch(err => next(err));
-	console.log('step 2 is here');
 }
 
 exports.offerstep3 = (req, res, next) => {
 	const item1 = req.params.item1;
     const item2 = req.params.item2;
-    console.log("from offer step3 : "+item1);
-    console.log("from offer step3 : "+item2);
    const curruser = req.session.user;
     currOffer = {};
     skin.findById(item1)
@@ -44,12 +41,15 @@ exports.offerstep3 = (req, res, next) => {
         .then(result =>{
             Promise.all([skin.findByIdAndUpdate(result.oFor, {status : "pending"}), skin.findByIdAndUpdate(result.oItem, {status : "pending"})])
             .then(result1 => {
-                offer.findByIdAndUpdate(result._id,{oStatus: 'made'}).then(abc => console.log("Success") ).catch(err=> next(err))
+                offer.findByIdAndUpdate(result._id,{oStatus: 'made'}).then(abc => {
+                    req.flash('success','Offer Made.')
+                    res.redirect('/users/profile')
+                } )
+                .catch(err=> next(err))
                 
             })
             .catch(err => next(err))
-            req.flash('success','Offer Made.')
-            res.redirect('/users/profile')
+            
 	    })
 	    .catch(err=>{
             if(err.name == 'ValidationError'){
@@ -65,17 +65,15 @@ exports.offerstep3 = (req, res, next) => {
     })
     .catch(err => next(err))
     
-	console.log('step 3 is here');
+	
 }
 
 exports.withdraw = (req, res, next) => {
     let offer1 = req.params.offer;
-    const curruser = req.session.user;
     offer.findById(offer1)
     .then(result =>{
         Promise.all([skin.findByIdAndUpdate(result.oFor, {status : "available"}), skin.findByIdAndUpdate(result.oItem, {status : "available"})])
         .then(result1 => {
-            console.log("Success");
             offer.findByIdAndDelete(offer1)
             .then(abc => res.redirect('/'))
             .catch(err => next(err))
