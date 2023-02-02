@@ -6,7 +6,6 @@ const userSchema = new Schema({
     lastName: {type: String, required: [true, 'LastName is required']},
     email: {type: String, required: [true, 'Email is required'], unique: true, index: true},
     password: {type: String, required: [true, 'Password is required']},
-    oCreated: {type: [Schema.Types.ObjectId], ref: 'Offer'},
     watch: {type: [Schema.Types.ObjectId], ref: 'Skin'}
 }, {autoIndex: false});
 

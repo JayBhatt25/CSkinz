@@ -69,7 +69,7 @@ exports.verify = (req, res, next) => {
 
 exports.profile = (req, res, next) => {
     let id = req.session.user;
-    Promise.all([user.findById(id).populate('watch').populate({path:'oCreated', populate: {path:'oItem', model:'Skin'}}).populate({path:'oCreated', populate: {path:'oFor', model:'Skin'}}), skins.find({owner: id}).populate('owner'),offers.find({forUser:id, oStatus: 'made'}).populate('oItem').populate('oFor'),offers.find({byUser: id}).populate('oItem').populate('oFor')])
+    Promise.all([user.findById(id).populate('watch'), skins.find({owner: id}).populate('owner'),offers.find({forUser:id, oStatus: 'made'}).populate('oItem').populate('oFor'),offers.find({byUser: id}).populate('oItem').populate('oFor')])
     .then((result) => {
         let [user, trades,offers,offersbyyou] = result;
         if(user){

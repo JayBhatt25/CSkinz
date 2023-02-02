@@ -4,7 +4,9 @@ const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const creds = require('./credentials');
 const flash = require('connect-flash');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const app = express();
 let port = 8080;
 let host = 'localhost';
@@ -15,7 +17,10 @@ app.use(morgan('tiny'));
 app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 
-mongoose.connect('mongodb://localhost:27017/skinsdb',{useNewUrlParser:true,useUnifiedTopology:true })
+
+const uri = creds.mongouri;
+
+mongoose.connect(uri,{useNewUrlParser:true,useUnifiedTopology:true, serverApi:ServerApiVersion.v1 })
 .then(()=> {
 	app.listen(port, host, (req, res) => {
 		console.log('Listening on port '+ port);
@@ -24,11 +29,11 @@ mongoose.connect('mongodb://localhost:27017/skinsdb',{useNewUrlParser:true,useUn
 .catch(err => console.log(err))
 
 app.use(session({
-	secret: 'Jay@cskinz',
+	secret: creds.sessionsecret,
 	resave: false,
 	saveUninitialized: false,
 	cookie: {maxAge: 60*60*1000},
-	store: new MongoStore({mongoUrl: 'mongodb://localhost:27017/skinsdb'})
+	store: new MongoStore({mongoUrl: creds.sessionstore})
 }));
 app.use(flash());
 app.use((req,res, next) => {
